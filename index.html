@@ -1,248 +1,334 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nikolay Kruzhilin | Portfolio</title>
-    <link rel="icon" type="image/png" href="icon.png">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Демо — Версия для слабовидящих</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Georgia, serif;
+      background: #f9f7f3;
+      color: #222;
+      padding: 48px clamp(16px, 4vw, 56px);
+      max-width: 1500px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+  header {
+    margin-bottom: 32px;
+  }
+
+    h1 { font-size: 2rem; margin-bottom: 8px; }
+    h2 { font-size: 1.25rem; margin: 32px 0 12px; }
+    h3 { font-size: 1.05rem; margin: 20px 0 8px; }
+
+    p { margin-bottom: 16px; }
+
+    a { color: #1a56db; }
+
+    ul, ol { margin: 0 0 16px 24px; }
+    li { margin-bottom: 6px; }
+
+    img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 8px;
+      display: block;
+      margin: 24px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      background: #fff;
+      font-size: 0.95rem;
+    }
+    th, td {
+      border: 1px solid #d5d0c8;
+      padding: 10px 12px;
+      text-align: left;
+    }
+    th { background: #efece6; }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 10px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #e8f0fe;
+      color: #1a56db;
+      border-radius: 4px;
+      padding: 2px 10px;
+      font-size: 0.85rem;
+      margin-right: 8px;
+      margin-bottom: 8px;
+    }
+
+    form { margin-top: 12px; }
+    label { display: block; margin-bottom: 4px; font-weight: bold; }
+    input[type="text"], input[type="email"], textarea {
+      width: 100%;
+      max-width: 380px;
+      padding: 8px 10px;
+      border: 1px solid #c9c4bb;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+    button.demo-btn {
+      background: #1a56db;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    button.demo-btn:hover { background: #1446b8; }
+
+    .color-demo {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .color-demo > div {
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+  /* Шапка сайта: заголовок + кнопка версии для слабовидящих */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    padding: 14px 18px;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 32px;
+  }
+  .site-header h1 {
+    font-size: 1.35rem;
+    margin: 0;
+    min-width: 260px;
+    flex: 1 1 320px;
+  }
+  .av-trigger-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    color: #1a56db;
+    border: 1px solid #c9d8f5;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    white-space: normal;
+    text-align: left;
+    line-height: 1.3;
+    max-width: 100%;
+    flex: 0 1 auto;
+  }
+  .av-trigger-btn svg { flex-shrink: 0; }
+  .av-trigger-btn:hover { background: #eef4fe; }
+
+  /* При крупных масштабах кнопка занимает всю строку шапки,
+     а не вылезает за контейнер */
+  @media (max-width: 720px) {
+    .av-trigger-btn { flex: 1 1 100%; justify-content: center; }
+  }
+
+  /* Имитация карточек dopportal: картинки через background-image */
+  .bg-gallery {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .bg-card {
+    width: 180px;
+    height: 120px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: flex-end;
+    color: #fff;
+    font-size: 0.8rem;
+    text-shadow: 0 1px 3px rgba(0,0,0,.9);
+    padding: 8px;
+  }
+  .bg-card-1 { background-image: url('https://picsum.photos/seed/av-bg-1/400/280'); }
+  .bg-card-2 { background-image: url('https://picsum.photos/seed/av-bg-2/400/280'); }
+  .bg-card-3 { background-image: url('https://picsum.photos/seed/av-bg-3/400/280'); }
+
+    footer {
+      margin-top: 64px;
+      border-top: 1px solid #ddd;
+      padding-top: 16px;
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    .tall-spacer { height: 60vh; }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <button class="hamburger" aria-label="Menu">☰</button>
-            <div class="logo">nikolaykruzhilin</div>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link active" data-key="nav_home" data-page="home">Главная</a></li>
-                <li><a href="#cv" class="nav-link" data-key="nav_cv" data-page="cv">Резюме</a></li>
-                <li><a href="#projects" class="nav-link" data-key="nav_projects" data-page="projects">Проекты</a></li>
-                <li><a href="#about" class="nav-link" data-key="nav_about" data-page="about">Обо мне</a></li>
-                <li><a href="#contact" class="nav-link" data-key="nav_contact" data-page="contact">Контакты</a></li>
-            </ul>
-            <div class="language-switcher">
-                <button class="lang-btn active" data-lang="ru">RU</button>
-                <button class="lang-btn" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="zh">中</button>
-            </div>
-            <button class="lang-toggle-mobile" aria-label="Switch language">RU</button>
-        </nav>
-    </header>
 
-    <main class="container">
-        <!-- ==================== HOME PAGE ==================== -->
-        <div class="page active" id="home">
-            <!--
-            Chat temporarily disabled until later
-            <div class="chat-container"> ... </div>
-            -->
-            <div class="content-section" style="text-align:center;">
-                <img src="imgs/profile.jpg" alt="Николай Кружилин — фото" class="profile-photo"
-                     style="width:160px; height:160px; object-fit:cover; border-radius:50%; border:1px solid var(--border-gray); display:block; margin:0 auto 1rem;">
-                <h1 data-key="cv_name" style="font-size:2.75rem; font-weight:700; margin-bottom:0.25rem;">Николай Кружилин</h1>
-                <p data-key="cv_position" style="font-size:1.05rem; margin-top:0.5rem;">Продуктовый менеджер / Маркетинг-менеджер / IT-специалист</p>
-                <br>
-                <p data-key="cv_description">
-                    Многопрофильный специалист с международным опытом в сфере образования, управления продуктами,
-                    маркетинга и операционной деятельности. Обладает навыками в области ИИ, технологий, дизайна, управления
-                    проектами и интеграции API. Эффективно работает с мультикультурными командами, управляет сложными
-                    проектами и добивается результатов в корпоративной и креативной среде.
-                </p>
-            </div>
-        </div>
+  <header class="site-header">
+    <h1>Демо-страница плагина «Версия для слабовидящих»</h1>
+    <button type="button" class="av-trigger-btn" data-av-trigger>
+      Версия для слабовидящих
+    </button>
+  </header>
 
-        <!-- ==================== CV PAGE ==================== -->
-        <div class="page" id="cv">
-            <div class="content-section">
-                <h2 data-key="cv_skills">Технические навыки</h2>
-                <div class="skill-marquee" id="skillMarquee">
-                    <div class="skill-track" id="skillTrack">
-                        <div class="skill-item" data-key="cv_skill_1">Python</div>
-                        <div class="skill-item" data-key="cv_skill_2">HTML</div>
-                        <div class="skill-item" data-key="cv_skill_3">CSS</div>
-                        <div class="skill-item" data-key="cv_skill_4">JavaScript</div>
-                        <div class="skill-item" data-key="cv_skill_sql">SQL</div>
-                        <div class="skill-item" data-key="cv_skill_linux">Linux</div>
-                        <div class="skill-item" data-key="cv_skill_jira">Jira</div>
-                        <div class="skill-item" data-key="cv_skill_5">Кибербезопасность (Kali Linux, CS50)</div>
-                        <div class="skill-item" data-key="cv_skill_6">UX‑дизайн</div>
-                        <div class="skill-item" data-key="cv_skill_7">Управление проектами</div>
-                        <div class="skill-item" data-key="cv_skill_8">Интеграция API</div>
-                        <div class="skill-item" data-key="cv_skill_10">n8n автоматизация</div>
-                        <div class="skill-item" data-key="cv_skill_11">Контекстное проектирование</div>
-                        <div class="skill-item" data-key="cv_skill_12">Цифровой маркетинг</div>
-                        <div class="skill-item" data-key="cv_skill_13">Фотография</div>
-                        <div class="skill-item" data-key="cv_skill_confluence">Confluence</div>
-                        <div class="skill-item" data-key="cv_skill_drawio">Drawio</div>
-                        <div class="skill-item" data-key="cv_skill_react">React</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content-section">
-                <h2 data-key="cv_experience">Опыт работы</h2>
-                <div class="exp-accordion" id="expAccordion"></div>
-            </div>
-
-            <div class="content-section">
-                <h2 data-key="cv_education">Образование</h2>
-                <div data-key="cv_edu_desc">
-                    <p><strong>Специалист</strong> — Перевод и переводоведение (английский и китайский языки), Томский Государственный Университет (с отличием), 2013.</p>
-                    <p>Годичный курс, Ляонинский Педагогический Университет (2013–2014).</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== PROJECTS PAGE ==================== -->
-        <div class="page" id="projects">
-            <div class="content-section">
-                <h1 data-key="projects_title">Проекты</h1>
-                <div class="project-grid">
-                    <div class="project-card" data-project="project1">
-                        <h3 data-key="project1_title"></h3>
-                        <p data-key="project1_desc"></p>
-                    </div>
-                    <div class="project-card" data-project="project2">
-                        <h3 data-key="project2_title"></h3>
-                        <p data-key="project2_desc"></p>
-                    </div>
-                    <div class="project-card" data-project="project3">
-                        <h3 data-key="project3_title"></h3>
-                        <p data-key="project3_desc"></p>
-                    </div>
-                    <div class="project-card" data-project="project4">
-                        <h3 data-key="project4_title"></h3>
-                        <p data-key="project4_desc"></p>
-                    </div>
-                    <div class="project-card" data-project="project5">
-                        <h3 data-key="project5_title"></h3>
-                        <p data-key="project5_desc"></p>
-                    </div>
-                    <div class="project-card" data-project="project6">
-                        <h3 data-key="project6_title"></h3>
-                        <p data-key="project6_desc"></p>
-                    </div>
-                    <div class="project-card" data-project="project7">
-                        <h3 data-key="project7_title"></h3>
-                        <p data-key="project7_desc"></p>
-                    </div>
-                    <div class="project-card" data-project="project8">
-                        <h3 data-key="project8_title"></h3>
-                        <p data-key="project8_desc"></p>
-                    </div>
-                    <div class="project-card" data-project="project9">
-                        <h3 data-key="project9_title"></h3>
-                        <p data-key="project9_desc"></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== ABOUT PAGE ==================== -->
-        <div class="page" id="about">
-            <div class="content-section">
-                <h1 data-key="about_title">Обо мне</h1>
-                <p data-key="about_paragraph" style="margin-top:1rem; color:var(--text-gray); line-height:1.6;"></p>
-                <div class="project-grid" style="margin-top:1.5rem;">
-                    <div class="about-card"
-                         data-media='[{"type":"image","src":"imgs/karate1.jpg","alt":"Karate 1"},{"type":"image","src":"imgs/karate2.jpg","alt":"Karate 2"},{"type":"image","src":"imgs/karate3.jpg","alt":"Karate 3"}]'>
-                        <h3 data-key="about_card_1_title">Карате</h3>
-                        <p data-key="about_card_1_desc" data-format="html">
-                          Мой путь в карате начался.<br><a href="http://goju.tomsk.ru/%d0%b0%d1%80%d1%85%d0%b8%d0%b2/2009-2013/" target="_blank" rel="noopener noreferrer">Ссылка на сайт</a> в раннем возрасте. Я достиг 2-го дана, звание КМС и стал чемпионом мира по версии IMGKA.<br>
-                          <a href="http://goju.tomsk.ru/%d0%b0%d1%80%d1%85%d0%b8%d0%b2/2009-2013/" target="_blank" rel="noopener noreferrer">Подробнее здесь</a>
-                        </p>
-                    </div>
-                    <div class="about-card"
-                         data-media='[{"type":"image","src":"imgs/street1.jpg","alt":"Street 1"},{"type":"image","src":"imgs/street2.jpg","alt":"Street 2"},{"type":"image","src":"imgs/street3.jpg","alt":"Street 3"},{"type":"image","src":"imgs/street4.jpg","alt":"Street 4"},{"type":"image","src":"imgs/street5.jpg","alt":"Street 5"},{"type":"image","src":"imgs/street6.jpg","alt":"Street 6"},{"type":"image","src":"imgs/street7.jpg","alt":"Street 7"},{"type":"image","src":"imgs/street8.jpg","alt":"Street 8"},{"type":"image","src":"imgs/street9.jpg","alt":"Street 9"},{"type":"image","src":"imgs/street10.jpg","alt":"Street 10"}]'>
-                        <h3 data-key="about_card_2_title">Уличная фотография</h3>
-                        <p data-key="about_card_2_desc">Увлечение уличной фотографией позволяет мне захватывать моменты повседневной жизни. Вот некоторые из моих лучших работ.</p>
-                    </div>
-                    <div class="about-card" data-media='[]'>
-                        <h3 data-key="about_card_3_title">Преподавание</h3>
-                        <p data-key="about_card_3_desc" data-format="html">
-                          Провожу курсы по фотографии и кинематографии, помогая другим развивать свои творческие навыки.<br>
-                          <a href="https://drive.google.com/file/d/1nT3mK1JcWLR3qKYz8srBitZair1Zzmep/view" target="_blank" rel="noopener noreferrer">Посмотреть материалы</a>
-                        </p>
-                    </div>
-                    <div class="about-card" data-media='[]'>
-                        <h3 data-key="about_card_4_title">Волонтерство</h3>
-                        <p data-key="about_card_4_desc" data-format="html">
-                          Я регулярно помогаю в приютах для животных и ухаживаю за бездомными животными.<br><a href="https://www.youtube.com/watch?v=xkOxdTTbjfg" target="_blank" rel="noopener noreferrer">Ссылка на видео</a><br>
-                          <a href="https://www.youtube.com/watch?v=xkOxdTTbjfg" target="_blank" rel="noopener noreferrer">Смотреть видео</a>
-                        </p>
-                    </div>
-                    <div class="about-card" data-media='[]'>
-                        <h3 data-key="about_card_5_title">#createtodonate</h3>
-                        <p data-key="about_card_5_desc">#createtodonate - проект, где творчество используется для сбора средств на благотворительность.</p>
-                    </div>
-                    <div class="about-card" data-media='[]'>
-                        <h3 data-key="about_card_6_title">Блог в Instagram</h3>
-                        <p data-key="about_card_6_desc" data-format="html">
-                          Веду блог в инстаграм, где делюсь опытом, извлеченным из работы над разными проектами и экспериментах с ИИ.<br>
-                          <a href="https://instagram.com/nikol.ai.kruzhilin" target="_blank" rel="noopener noreferrer">@nikol.ai.kruzhilin</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ==================== CONTACT PAGE ==================== -->
-        <div class="page" id="contact">
-            <div class="content-section">
-                <h1 data-key="contact_title">Контактная информация</h1>
-                <div class="contact-grid">
-                    <div class="contact-item">
-                        <h3 data-key="contact_email">Электронная почта</h3>
-                        <p>nikolaykruzhilin@yandex.ru</p>
-                    </div>
-                    <div class="contact-item">
-                        <h3 data-key="contact_phone">Телефон</h3>
-                        <p>+7-993-602-18-66</p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>GitHub</h3>
-                        <p>github.com/NikolayKruzhilin</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <!-- ==================== PROJECT MODAL ==================== -->
-    <div id="projectModal" class="modal-overlay" style="display:none;">
-        <div class="modal-dialog">
-            <div class="modal-sticky-bar">
-                <button id="closeModal" class="modal-close" aria-label="Close">&times;</button>
-            </div>
-            <h2 id="modalTitle"></h2>
-            <p id="modalDescription"></p>
-            <div id="modalMedia" class="modal-media"></div>
-        </div>
-        <div id="lightbox" class="lightbox-overlay" style="display:none;">
-            <button id="prevBtn" class="lightbox-nav lightbox-prev" aria-label="Previous">&lt;</button>
-            <img id="lightboxImg" class="lightbox-img" alt="" />
-            <button id="nextBtn" class="lightbox-nav lightbox-next" aria-label="Next">&gt;</button>
-            <button id="closeLightbox" class="lightbox-close" aria-label="Close">&times;</button>
-        </div>
+  <main>
+    <div class="card">
+      <h2>О плагине</h2>      <p>
+        Виджет позволяет настроить отображение страницы под свои нужды:
+        размер текста, цветовые схемы, межбуквенный интервал, фильтры,
+        скрытие изображений и увеличенный межстрочный интервал.
+      </p>
+      <p>
+        Все настройки сохраняются в <code>localStorage</code>
+        и применяются при следующем открытии страницы.
+      </p>
     </div>
 
-    <!-- ==================== ABOUT MODAL ==================== -->
-    <div id="aboutModal" class="modal-overlay" style="display:none;">
-        <div class="modal-dialog modal-dialog--wide">
-            <div class="modal-sticky-bar">
-                <button id="aboutCloseModal" class="modal-close" aria-label="Close">&times;</button>
-            </div>
-            <h2 id="aboutModalTitle"></h2>
-            <p id="aboutModalDescription"></p>
-            <div id="aboutModalMedia" class="modal-media about-modal-media"></div>
-        </div>
-        <div id="aboutLightbox" class="lightbox-overlay" style="display:none;">
-            <button id="aboutPrevBtn" class="lightbox-nav lightbox-prev" aria-label="Previous">&lt;</button>
-            <img id="aboutLightboxImg" class="lightbox-img" alt="" />
-            <button id="aboutNextBtn" class="lightbox-nav lightbox-next" aria-label="Next">&gt;</button>
-            <button id="aboutCloseLightbox" class="lightbox-close" aria-label="Close">&times;</button>
-        </div>
+    <div class="card">
+      <h2>Пример текстового контента</h2>
+      <p>
+        Давным-давно в далёкой галактике жили программисты, которые писали
+        доступные интерфейсы. Они верили, что хороший веб работает для всех —
+        независимо от того, как человек воспринимает информацию.
+      </p>
+      <p>
+        Попробуйте включить <strong>высокий контраст</strong>,
+        <strong>инверсию цветов</strong> или увеличить
+        <strong>межстрочный интервал</strong> — изменения применяются мгновенно.
+      </p>
+      <h3>Список возможностей</h3>
+      <ul>
+        <li>Размер текста — 100%, 150% или 200%;</li>
+        <li>Цветовые схемы: чёрным по белому, белым по чёрному, синим по голубому;</li>
+        <li>Межбуквенный интервал: обычный, средний, большой;</li>
+        <li>Фильтры: инверсия цветов, оттенки серого;</li>
+        <li>Скрыть изображения — включая картинки через background-image;</li>
+        <li>Увеличенный межстрочный интервал.</li>
+      </ul>
     </div>
 
-    <script src="script.js"></script>
+    <div class="card">
+      <h2>Обычные изображения</h2>
+      <p>Опция «Скрыть изображения» скроет картинки ниже:</p>
+      <img
+        src="https://picsum.photos/seed/av-demo-1/800/400"
+        alt="Случайное демо-изображение из picsum.photos"
+      />
+      <img
+        src="https://picsum.photos/seed/av-demo-2/400/400"
+        alt="Вторая случайная демо-картинка"
+      />
+    </div>
+
+    <div class="card">
+      <h2>Картинки через background-image</h2>
+      <p>
+        Так часто выводятся галереи и фото педагогов на сайтах с клиентским
+        рендерингом (Nuxt/Vue, как на dopportal.ru). Режим «Скрыть изображения»
+        убирает и их — фон элементов полностью отключается:
+      </p>
+      <div class="bg-gallery">
+        <div class="bg-card bg-card-1">Фото программы 1</div>
+        <div class="bg-card bg-card-2">Фото программы 2</div>
+        <div class="bg-card bg-card-3">Фото педагога</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Таблица</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Режим</th>
+            <th>Назначение</th>
+            <th>Кому подходит</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Высокий контраст</td>
+            <td>Максимальная читаемость</td>
+            <td>Слабовидящие пользователи</td>
+          </tr>
+          <tr>
+            <td>Оттенки серого</td>
+            <td>Отключение цвета</td>
+            <td>Пользователи с дальтонизмом</td>
+          </tr>
+          <tr>
+            <td>Крупный шрифт</td>
+            <td>Текст 150–200%</td>
+            <td>Все, кто читает с увеличением</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>Форма</h2>
+      <p>Проверьте, что элементы форм остаются читаемыми во всех режимах:</p>
+      <form onsubmit="return false;">
+        <label for="demo-name">Ваше имя</label>
+        <input type="text" id="demo-name" placeholder="Иван Иванов" />
+        <label for="demo-email">Электронная почта</label>
+        <input type="email" id="demo-email" placeholder="ivan@example.ru" />
+        <button type="submit" class="demo-btn">Отправить</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h2>Цветные элементы</h2>
+      <p>
+        В режиме оттенков серого все блоки ниже станут бесцветными,
+        а в высококонтрастном — обретут чёткие границы.
+      </p>
+      <div class="color-demo">
+        <div style="background:#e74c3c; color:#fff;">Красный блок</div>
+        <div style="background:#27ae60; color:#fff;">Зелёный блок</div>
+        <div style="background:#2980b9; color:#fff;">Синий блок</div>
+        <div style="background:#f1c40f; color:#333;">Жёлтый блок</div>
+      </div>
+    </div>
+
+    <div class="tall-spacer" aria-hidden="true"></div>
+    <p>
+      Конец длинной страницы. Прокрутите вверх и вниз, чтобы убедиться,
+      что все режимы применяются корректно.
+    </p>
+  </main>
+
+  <footer>
+    <p>Демо-страница для тестирования плагина accessible-version.js</p>
+  </footer>
+
+  <script src="accessible-version.js"></script>
 </body>
 </html>
